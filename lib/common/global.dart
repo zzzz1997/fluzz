@@ -19,6 +19,8 @@ class Global {
   /// 初始化
   ///
   static init() async {
+    Get.lazyPut(() => ThemeController());
+    Get.lazyPut(() => LocaleController());
     await Get.putAsync(StorageService().init);
     sharedPreferences = await SharedPreferences.getInstance();
   }
