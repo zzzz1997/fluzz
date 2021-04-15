@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:fluzz/page/splash.dart';
 
+import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'common/global.dart';
-import 'common/route.dart';
-import 'generated/l10n.dart';
-import 'model/locale.dart';
-import 'model/theme.dart';
+import 'package:fluzz/common/translation.dart';
+import 'package:fluzz/common/global.dart';
+import 'package:fluzz/common/route.dart';
 
 ///
 /// 应用入口
@@ -32,35 +30,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OKToast(
-      child: MultiProvider(
-        providers: [
-          ChangeNotifierProvider<ThemeModel>(
-            create: (_) => ThemeModel(),
-          ),
-          ChangeNotifierProvider<LocaleModel>(
-            create: (_) => LocaleModel(),
-          ),
-        ],
-        child: Consumer2<ThemeModel, LocaleModel>(
-          builder: (_, themeModel, localeModel, __) => MaterialApp(
-            navigatorKey: Global.key,
-            title: title,
-            theme: themeModel.themeData(),
-            darkTheme: themeModel.themeData(platformDarkMode: true),
-            locale: localeModel.locale,
-            localizationsDelegates: const [
-              S.delegate,
-              GlobalCupertinoLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-            ],
-            supportedLocales: S.delegate.supportedLocales,
-            onGenerateRoute: MyRoute.generateRoute,
-            initialRoute: MyRoute.splash,
-          ),
-        ),
-      ),
+    return FutureBuilder(
+      future: Future.delayed(const Duration(seconds: 1)),
+      builder: (_, snapshot) =>
+          snapshot.connectionState == ConnectionState.waiting
+              ? MaterialApp(
+                  home: SplashPage(),
+                )
+              : OKToast(
+                  child: GetMaterialApp(
+                    title: title,
+                    getPages: FluzzRoute.routes,
+                    initialRoute: FluzzRoute.home,
+                    initialBinding: FluzzBinding(),
+                    // locale: Locale('zh', 'CN'),
+                    translations: FluzzTranslation(),
+                  ),
+                ),
     );
   }
 }

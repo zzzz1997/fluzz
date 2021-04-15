@@ -1,11 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-import '../common/global.dart';
-import '../common/resource.dart';
-import '../common/route.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluzz/common/resource.dart';
+import 'package:get/get.dart';
 
 ///
 /// 开屏页面
@@ -13,27 +10,7 @@ import '../common/route.dart';
 /// @author zzzz1997
 /// @created_time 20200911
 ///
-class SplashPage extends StatefulWidget {
-  @override
-  _SplashPageState createState() => _SplashPageState();
-}
-
-///
-/// 开屏页面状态
-///
-class _SplashPageState extends State<SplashPage> {
-  // 定时器
-  Timer _timer;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _timer = Timer(Duration(seconds: 1), () {
-      MyRoute.pushReplacementNamed(MyRoute.home);
-    });
-  }
-
+class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +23,7 @@ class _SplashPageState extends State<SplashPage> {
             height: 200,
           ),
           SizedBox(
-            width: Global.mediaQuery.size.width,
+            width: Get.width,
             height: 20,
           ),
           Text(
@@ -60,12 +37,5 @@ class _SplashPageState extends State<SplashPage> {
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    _timer = null;
-    super.dispose();
   }
 }

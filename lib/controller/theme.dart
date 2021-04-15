@@ -1,17 +1,17 @@
-import 'package:dart_mock/dart_mock.dart' as mock;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-import '../common/global.dart';
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dart_mock/dart_mock.dart' as mock;
 
 ///
-/// 主题模型
+/// 主题控制器
 ///
 /// @author zzzz1997
-/// @created_time 20191122
+/// @created_time 20210414
 ///
-class ThemeModel extends ChangeNotifier {
+class ThemeController extends GetxController {
   // 夜间模式键
   static const kIsDarkMode = 'kIsDarkMode';
 
@@ -24,75 +24,84 @@ class ThemeModel extends ChangeNotifier {
   // 字体数组
   static const fontValueList = ['system', 'kuaile'];
 
-  // 夜间模式
-  bool _isDarkMode;
+  // 存储对象
+  late SharedPreferences sp;
 
-  // 获取夜间模式
-  bool get isDarkMode => _isDarkMode;
+  // 是否黑暗模式
+  late RxBool isDarkMode;
 
   // 主题色
-  MaterialColor _themeColor;
+  late Rx<MaterialColor> themeColor;
 
-  // 字体索引
-  int _fontIndex;
+  // 字体位置
+  late RxInt fontIndex;
 
-  // 获取字体索引
-  int get fontIndex => _fontIndex;
+  @override
+  onInit() {
+    super.onInit();
 
-  ThemeModel() {
-    _isDarkMode = Global.sharedPreferences.getBool(kIsDarkMode) ?? false;
-    _themeColor =
-        Colors.primaries[Global.sharedPreferences.getInt(kThemeColor) ?? 5];
-    _fontIndex = Global.sharedPreferences.getInt(kFontIndex) ?? 0;
+    sp = Get.find<SharedPreferences>();
+    isDarkMode = (sp.getBool(kIsDarkMode) ?? Get.isDarkMode).obs;
+    themeColor = Colors.primaries[sp.getInt(kThemeColor) ?? 5].obs;
+    fontIndex = (sp.getInt(kFontIndex) ?? 0).obs;
+  }
+
+  @override
+  onReady() {
+    super.onReady();
+
+    Get.changeTheme(themeData());
   }
 
   ///
-  /// 切换主题
+  /// 更改主题
   ///
-  switchTheme({bool isDarkMode, MaterialColor color}) {
-    _isDarkMode = isDarkMode ?? _isDarkMode;
-    _themeColor = color ?? _themeColor;
-    notifyListeners();
-    int index = Colors.primaries.indexOf(_themeColor);
-    Global.sharedPreferences.setBool(kIsDarkMode, _isDarkMode);
-    Global.sharedPreferences.setInt(kThemeColor, index);
-  }
-
-  ///
-  /// 切换随机主题
-  ///
-  switchRandomTheme() {
-    switchTheme(
-      isDarkMode: mock.boolean(),
-      color: Colors.primaries[mock.integer(max: Colors.primaries.length - 1)],
-    );
+  switchTheme({bool? mode, MaterialColor? color}) {
+    if (isDarkMode.value != mode || themeColor.value != color) {
+      isDarkMode(mode);
+      themeColor(color);
+      Get.changeTheme(themeData());
+      sp.setBool(kIsDarkMode, isDarkMode.value);
+      sp.setInt(kThemeColor, Colors.primaries.indexOf(themeColor.value));
+    }
   }
 
   ///
   /// 切换字体
   ///
   switchFont(int index) {
-    _fontIndex = index;
-    switchTheme();
-    Global.sharedPreferences.setInt(kFontIndex, index);
+    if (fontIndex.value != index) {
+      fontIndex(index);
+      sp.setInt(kFontIndex, index);
+      Get.changeTheme(themeData());
+    }
+  }
+
+  ///
+  /// 切换随机主题
+  ///
+  randomTheme() {
+    switchTheme(
+      mode: mock.boolean(),
+      color: Colors.primaries[mock.integer(max: Colors.primaries.length - 1)],
+    );
   }
 
   ///
   /// 主题
   ///
   ThemeData themeData({bool platformDarkMode = false}) {
-    bool isDark = platformDarkMode || _isDarkMode;
+    bool isDark = platformDarkMode || isDarkMode.value;
     Brightness brightness = isDark ? Brightness.dark : Brightness.light;
-
-    MaterialColor themeColor = _themeColor;
-    Color accentColor = isDark ? themeColor[700] : _themeColor;
+    Color accentColor = (isDark ? themeColor.value[700] : themeColor.value)!;
     ThemeData themeData = ThemeData(
-        brightness: brightness,
-        primaryColorBrightness: Brightness.dark,
-        accentColorBrightness: Brightness.dark,
-        primarySwatch: themeColor,
-        accentColor: accentColor,
-        fontFamily: fontValueList[fontIndex]);
+      brightness: brightness,
+      primaryColorBrightness: Brightness.dark,
+      accentColorBrightness: Brightness.dark,
+      primarySwatch: themeColor.value,
+      accentColor: accentColor,
+      fontFamily: fontValueList[fontIndex.value],
+    );
 
     Color primaryColor = themeData.primaryColor;
     Color dividerColor = themeData.dividerColor;
@@ -105,21 +114,23 @@ class ThemeModel extends ChangeNotifier {
       brightness: brightness,
       accentColor: accentColor,
       cupertinoOverrideTheme: CupertinoThemeData(
-        primaryColor: themeColor,
+        primaryColor: themeColor.value,
         brightness: brightness,
       ),
       appBarTheme: themeData.appBarTheme.copyWith(elevation: 0),
-      splashColor: themeColor.withAlpha(50),
+      splashColor: themeColor.value.withAlpha(50),
       hintColor: themeData.hintColor.withAlpha(90),
       errorColor: Colors.red,
-      cursorColor: accentColor,
       textTheme: themeData.textTheme.copyWith(
-        subtitle2: themeData.textTheme.subtitle2.copyWith(
+        subtitle2: themeData.textTheme.subtitle2!.copyWith(
           textBaseline: TextBaseline.alphabetic,
         ),
       ),
-      textSelectionColor: accentColor.withAlpha(60),
-      textSelectionHandleColor: accentColor.withAlpha(60),
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: accentColor,
+        selectionColor: accentColor.withAlpha(60),
+        selectionHandleColor: accentColor.withAlpha(60),
+      ),
       toggleableActiveColor: accentColor,
       chipTheme: themeData.chipTheme.copyWith(
         pressElevation: 0,
@@ -176,9 +187,9 @@ class ThemeModel extends ChangeNotifier {
   static String fontName(index) {
     switch (index) {
       case 0:
-        return Global.s.autoBySystem;
+        return 'autoBySystem'.tr;
       case 1:
-        return Global.s.fontKuaiLe;
+        return 'fontKuaiLe'.tr;
       default:
         return '';
     }

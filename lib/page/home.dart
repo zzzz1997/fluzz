@@ -1,12 +1,13 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:fluzz/controller/locale.dart';
+import 'package:fluzz/controller/theme.dart';
 
-import '../common/global.dart';
-import '../common/resource.dart';
-import '../model/locale.dart';
-import '../model/theme.dart';
+import 'package:get/get.dart';
+
+import 'package:fluzz/common/global.dart';
+import 'package:fluzz/common/resource.dart';
 
 ///
 /// 主页面
@@ -14,20 +15,14 @@ import '../model/theme.dart';
 /// @author zzzz1997
 /// @created_time 20200911
 ///
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-///
-/// 主页面状态
-///
-class _HomePageState extends State<HomePage> {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final themeController = Get.find<ThemeController>();
+    final localeController = Get.find<LocaleController>();
     return Scaffold(
       appBar: AppBar(
-        title: Text(Global.s.appName),
+        title: Text('appName'.tr),
       ),
       body: SingleChildScrollView(
         child: ListTileTheme(
@@ -55,9 +50,10 @@ class _HomePageState extends State<HomePage> {
               Material(
                 color: Theme.of(context).cardColor,
                 child: ListTile(
-                  title: Text(Global.s.darkMode),
+                  title: Text('darkMode'.tr),
                   onTap: () {
-                    _switchDarkMode(context);
+                    // _switchDarkMode(context);
+                    themeController.switchTheme(mode: !Get.isDarkMode);
                   },
                   leading: Transform.rotate(
                     angle: -pi,
@@ -83,7 +79,7 @@ class _HomePageState extends State<HomePage> {
               Material(
                 color: Theme.of(context).cardColor,
                 child: ExpansionTile(
-                  title: Text(Global.s.colorTheme),
+                  title: Text('colorTheme'.tr),
                   leading: Icon(
                     Icons.color_lens,
                     color: Theme.of(context).accentColor,
@@ -103,9 +99,8 @@ class _HomePageState extends State<HomePage> {
                                     color: color,
                                     child: InkWell(
                                       onTap: () {
-                                        Provider.of<ThemeModel>(context,
-                                                listen: false)
-                                            .switchTheme(color: color);
+                                        themeController.switchTheme(
+                                            color: color);
                                       },
                                       child: SizedBox(
                                         width: 40,
@@ -117,8 +112,7 @@ class _HomePageState extends State<HomePage> {
                           Material(
                             child: InkWell(
                               onTap: () {
-                                Provider.of<ThemeModel>(context, listen: false)
-                                    .switchRandomTheme();
+                                themeController.randomTheme();
                               },
                               child: Container(
                                 alignment: Alignment.center,
@@ -154,12 +148,10 @@ class _HomePageState extends State<HomePage> {
                   title: Row(
                     children: <Widget>[
                       Expanded(
-                        child: Text(Global.s.font),
+                        child: Text('font'.tr),
                       ),
                       Text(
-                        ThemeModel.fontName(
-                            Provider.of<ThemeModel>(context, listen: false)
-                                .fontIndex),
+                        ThemeController.fontName(themeController.fontIndex),
                         style: Theme.of(context).textTheme.caption,
                       ),
                     ],
@@ -171,19 +163,17 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     ListView.builder(
                       shrinkWrap: true,
-                      itemBuilder: (_, i) {
-                        var model =
-                            Provider.of<ThemeModel>(context, listen: false);
-                        return RadioListTile(
+                      itemBuilder: (_, i) => Obx(
+                        () => RadioListTile<int>(
                           value: i,
-                          groupValue: model.fontIndex,
+                          groupValue: themeController.fontIndex.value,
                           onChanged: (i) {
-                            model.switchFont(i);
+                            themeController.switchFont(i!);
                           },
-                          title: Text(ThemeModel.fontName(i)),
-                        );
-                      },
-                      itemCount: ThemeModel.fontValueList.length,
+                          title: Text(ThemeController.fontName(i)),
+                        ),
+                      ),
+                      itemCount: ThemeController.fontValueList.length,
                     ),
                   ],
                 ),
@@ -197,11 +187,11 @@ class _HomePageState extends State<HomePage> {
                   title: Row(
                     children: <Widget>[
                       Expanded(
-                        child: Text(Global.s.language),
+                        child: Text('language'.tr),
                       ),
                       Text(
-                        LocaleModel.localeName(
-                            Provider.of<LocaleModel>(context).localeIndex),
+                        LocaleController.localeName(
+                            localeController.localeIndex.value),
                         style: Theme.of(context).textTheme.caption,
                       ),
                     ],
@@ -213,18 +203,17 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     ListView.builder(
                       shrinkWrap: true,
-                      itemBuilder: (_, i) {
-                        var model = Provider.of<LocaleModel>(context);
-                        return RadioListTile(
+                      itemBuilder: (_, i) => Obx(
+                        () => RadioListTile<int>(
                           value: i,
-                          groupValue: model.localeIndex,
+                          groupValue: localeController.localeIndex.value,
                           onChanged: (i) {
-                            model.switchLocale(i);
+                            localeController.switchLocale(i!);
                           },
-                          title: Text(LocaleModel.localeName(i)),
-                        );
-                      },
-                      itemCount: LocaleModel.localeValueList.length,
+                          title: Text(LocaleController.localeName(i)),
+                        ),
+                      ),
+                      itemCount: LocaleController.localeValueList.length,
                     ),
                   ],
                 ),
@@ -236,16 +225,16 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  ///
-  /// 切换夜间模式
-  ///
-  _switchDarkMode(context) {
-    if (Global.mediaQuery.platformBrightness == Brightness.dark) {
-      Global.toast('检测到系统为暗黑模式,已为你自动切换');
-    } else {
-      Provider.of<ThemeModel>(context, listen: false).switchTheme(
-        isDarkMode: Theme.of(context).brightness == Brightness.light,
-      );
-    }
-  }
+// ///
+// /// 切换夜间模式
+// ///
+// _switchDarkMode(context) {
+//   if (Get.isPlatformDarkMode) {
+//     Global.toast('检测到系统为暗黑模式,已为你自动切换');
+//   } else {
+//     Provider.of<ThemeModel>(context, listen: false).switchTheme(
+//       isDarkMode: Theme.of(context).brightness == Brightness.light,
+//     );
+//   }
+// }
 }

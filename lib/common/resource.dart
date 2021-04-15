@@ -20,7 +20,6 @@ class IconFonts {
 /// 图片帮助类
 ///
 class ImageHelper {
-
   ///
   /// 图片链接
   ///
@@ -30,7 +29,7 @@ class ImageHelper {
   /// 网络图片
   ///
   static ExtendedImage networkImage(String url,
-      {double width, double height, BoxFit fit, BoxShape shape}) {
+      {double? width, double? height, BoxFit? fit, BoxShape? shape}) {
     return ExtendedImage.network(
       url,
       width: width,
@@ -56,7 +55,7 @@ class ImageHelper {
   /// 本地资源图片
   ///
   static Image assetImage(String name,
-      {double width, double height, BoxFit fit}) {
+      {double? width, double? height, BoxFit? fit}) {
     return Image.asset(
       image(name),
       width: width,
@@ -69,6 +68,4 @@ class ImageHelper {
 ///
 ///
 /// 样式
-class Style {
-
-}
+class Style {}
