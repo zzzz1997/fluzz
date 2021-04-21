@@ -13,7 +13,7 @@ import 'package:fluzz/controller/theme.dart';
 ///
 class Global {
   // SharedPreferences对象
-  static late SharedPreferences sharedPreferences;
+  // static late SharedPreferences sharedPreferences;
 
   ///
   /// 初始化
@@ -22,7 +22,7 @@ class Global {
     Get.lazyPut(() => ThemeController());
     Get.lazyPut(() => LocaleController());
     await Get.putAsync(StorageService().init);
-    sharedPreferences = await SharedPreferences.getInstance();
+    // sharedPreferences = await SharedPreferences.getInstance();
   }
 
   ///
