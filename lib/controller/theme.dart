@@ -90,32 +90,38 @@ class ThemeController extends GetxController {
   /// 主题
   ///
   ThemeData themeData({bool platformDarkMode = false}) {
-    bool isDark = platformDarkMode || isDarkMode.value;
-    Brightness brightness = isDark ? Brightness.dark : Brightness.light;
-    Color accentColor = (isDark ? themeColor.value[700] : themeColor.value)!;
+    final isDark = platformDarkMode || isDarkMode.value;
+    final brightness = isDark ? Brightness.dark : Brightness.light;
+    final primary = (isDark ? themeColor.value[700] : themeColor.value)!;
+    final colorScheme = isDark
+        ? ColorScheme.dark(
+            primary: primary,
+          )
+        : ColorScheme.light(
+            primary: primary,
+          );
     ThemeData themeData = ThemeData(
       brightness: brightness,
       primaryColorBrightness: Brightness.dark,
-      accentColorBrightness: Brightness.dark,
       primarySwatch: themeColor.value,
-      accentColor: accentColor,
       fontFamily: fontValueList[fontIndex.value],
+      colorScheme: colorScheme,
     );
 
-    Color primaryColor = themeData.primaryColor;
-    Color dividerColor = themeData.dividerColor;
-    Color errorColor = themeData.errorColor;
-    Color disabledColor = themeData.disabledColor;
+    final primaryColor = themeData.primaryColor;
+    final dividerColor = themeData.dividerColor;
+    final errorColor = themeData.errorColor;
+    final disabledColor = themeData.disabledColor;
 
-    double width = 0.5;
+    final width = 0.5;
 
     themeData = themeData.copyWith(
       brightness: brightness,
-      accentColor: accentColor,
       cupertinoOverrideTheme: CupertinoThemeData(
         primaryColor: themeColor.value,
         brightness: brightness,
       ),
+      colorScheme: colorScheme,
       appBarTheme: themeData.appBarTheme.copyWith(elevation: 0),
       splashColor: themeColor.value.withAlpha(50),
       hintColor: themeData.hintColor.withAlpha(90),
@@ -126,11 +132,11 @@ class ThemeController extends GetxController {
         ),
       ),
       textSelectionTheme: TextSelectionThemeData(
-        cursorColor: accentColor,
-        selectionColor: accentColor.withAlpha(60),
-        selectionHandleColor: accentColor.withAlpha(60),
+        cursorColor: primary,
+        selectionColor: primary.withAlpha(60),
+        selectionHandleColor: primary.withAlpha(60),
       ),
-      toggleableActiveColor: accentColor,
+      toggleableActiveColor: primary,
       chipTheme: themeData.chipTheme.copyWith(
         pressElevation: 0,
         padding: EdgeInsets.symmetric(horizontal: 10),

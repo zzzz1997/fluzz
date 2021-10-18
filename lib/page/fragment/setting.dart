@@ -41,7 +41,7 @@ class SettingFragment extends StatelessWidget {
                 child: Icon(
                   IconFonts.fluzz,
                   size: 200,
-                  color: Theme.of(context).accentColor,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
               SizedBox(
@@ -61,11 +61,11 @@ class SettingFragment extends StatelessWidget {
                       Theme.of(context).brightness == Brightness.light
                           ? Icons.brightness_5
                           : Icons.brightness_2,
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                   trailing: Switch(
-                    activeColor: Theme.of(context).accentColor,
+                    activeColor: Theme.of(context).colorScheme.primary,
                     value: Theme.of(context).brightness == Brightness.dark,
                     onChanged: (_) {
 //                      switchDarkMode();
@@ -82,7 +82,7 @@ class SettingFragment extends StatelessWidget {
                   title: Text('colorTheme'.tr),
                   leading: Icon(
                     Icons.color_lens,
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                   children: <Widget>[
                     Padding(
@@ -118,7 +118,8 @@ class SettingFragment extends StatelessWidget {
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                    color: Theme.of(context).accentColor,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                   ),
                                 ),
                                 width: 40,
@@ -127,7 +128,8 @@ class SettingFragment extends StatelessWidget {
                                   '?',
                                   style: TextStyle(
                                     fontSize: 20,
-                                    color: Theme.of(context).accentColor,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                   ),
                                 ),
                               ),
@@ -158,7 +160,7 @@ class SettingFragment extends StatelessWidget {
                   ),
                   leading: Icon(
                     Icons.font_download,
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                   children: [
                     ListView.builder(
@@ -198,7 +200,7 @@ class SettingFragment extends StatelessWidget {
                   ),
                   leading: Icon(
                     Icons.public,
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                   children: [
                     ListView.builder(
