@@ -1,7 +1,6 @@
-import 'package:get/get.dart';
-
 import 'package:fluzz/page/home.dart';
-import 'package:fluzz/page/splash.dart';
+import 'package:get/get.dart';
+// import 'package:fluzz/page/splash.dart';
 
 ///
 /// 自定义路由
@@ -14,7 +13,7 @@ class FluzzRoute {
   // static const splash = 'splash';
 
   // 主页路由
-  static const home = 'home';
+  static const home = '/home';
 
   // 路由
   static final routes = [

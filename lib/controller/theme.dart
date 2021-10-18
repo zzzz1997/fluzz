@@ -1,9 +1,8 @@
+import 'package:dart_mock/dart_mock.dart' as mock;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dart_mock/dart_mock.dart' as mock;
 
 ///
 /// 主题控制器

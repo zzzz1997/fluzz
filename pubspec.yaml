@@ -12,46 +12,54 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.3
   # 状态管理
-  get: ^4.1.4
+  get: ^4.3.8
   # 缓存图片
-  extended_image: ^4.0.1
+  extended_image: ^5.1.2
   # 模拟数据
   dart_mock: ^2.0.0
   # 吐司
-  oktoast: ^3.0.0
+  bot_toast: ^4.0.1
   # 本地存储
-  shared_preferences: ^2.0.5
+  shared_preferences: ^2.0.8
   # 序列化注解
-  json_annotation: ^4.0.1
+  json_annotation: ^4.3.0
   # svg
-  flutter_svg: ^0.21.0+1
+  flutter_svg: ^0.23.0+1
+  # 刷新
+  flutter_easyrefresh: ^2.2.1
+  # 网络请求
+  dio: ^4.0.0
+  # 日志
+  logger: ^1.1.0
+  # 事件
+  event_bus: ^2.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   # 构建工具
-  build_runner: ^1.12.2
+  build_runner: ^2.1.4
   # 序列化工具
-  json_serializable: ^4.1.0
+  json_serializable: ^6.0.0
   # 开屏
-  flutter_native_splash: ^1.1.7+1
+  flutter_native_splash: ^1.2.4
 
 flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/
+    - asset/image/
 
   fonts:
     - family: fluzz
       fonts:
-        - asset: assets/fonts/iconfont.ttf
+        - asset: asset/font/iconfont.ttf
     - family: kuaile
       fonts:
-        - asset: assets/fonts/ZCOOLKuaiLe-Regular.ttf
+        - asset: asset/font/ZCOOLKuaiLe-Regular.ttf
 
 flutter_native_splash:
   color: "#42a5f5"
-  image: assets/images/ic_fluzz.png
+  image: asset/image/ic_fluzz.png

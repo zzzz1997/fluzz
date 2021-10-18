@@ -17,7 +17,13 @@ class FluzzTranslation extends Translations {
           "font": "字体",
           "autoBySystem": "跟随系统",
           "fontKuaiLe": "快乐字体",
-          "language": "语言"
+          "language": "语言",
+          "home": "首页",
+          "setting": "设置",
+          "load": "加载",
+          "refresh": "刷新",
+          "increase": "增加",
+          "noMore": "没有更多了"
         },
         'en': {
           "_locale": "en",
@@ -27,7 +33,13 @@ class FluzzTranslation extends Translations {
           "font": "Font",
           "autoBySystem": "Auto",
           "fontKuaiLe": "ZCOOL KuaiLe",
-          "language": "Language"
+          "language": "Language",
+          "home": "Home",
+          "setting": "Setting",
+          "load": "Load",
+          "refresh": "Refresh",
+          "increase": "Increase",
+          "noMore": "No More"
         }
       };
 }

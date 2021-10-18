@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluzz/common/resource.dart';
+import 'package:fluzz/common/widget.dart';
 import 'package:get/get.dart';
 
 ///
@@ -18,7 +17,7 @@ class SplashPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SvgPicture.asset(
-            ImageHelper.image('ic_fluzz.svg'),
+            Widgets.assetUrl('ic_fluzz.svg'),
             width: 200,
             height: 200,
           ),
