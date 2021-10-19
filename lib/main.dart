@@ -8,7 +8,6 @@ import 'package:fluzz/common/route.dart';
 import 'package:fluzz/common/translation.dart';
 import 'package:fluzz/controller/locale.dart';
 import 'package:fluzz/controller/theme.dart';
-import 'package:fluzz/page/splash.dart';
 import 'package:get/get.dart';
 
 ///
@@ -38,47 +37,36 @@ class MyApp extends StatelessWidget {
       Global.toast('登录失效，请重新登录');
       // Get.offAllNamed(MyRoute.login);
     });
-    return FutureBuilder(
-      future: Future.delayed(const Duration(seconds: 1)),
-      builder: (_, snapshot) {
-        final themeController = Get.find<ThemeController>();
-        final localeController = Get.find<LocaleController>();
-        return snapshot.connectionState == ConnectionState.waiting
-            ? MaterialApp(
-                home: SplashPage(),
-                theme: themeController.themeData(),
-                locale: localeController.locale,
-              )
-            : GetMaterialApp(
-                title: Constant.title,
-                theme: themeController.themeData(),
-                locale: localeController.locale,
-                translations: FluzzTranslation(),
-                getPages: FluzzRoute.routes,
-                initialRoute: FluzzRoute.home,
-                builder: (context, child) => MediaQuery(
-                  data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      var focusScope = FocusScope.of(context);
-                      if (!focusScope.hasPrimaryFocus &&
-                          focusScope.focusedChild != null) {
-                        FocusManager.instance.primaryFocus!.unfocus();
-                      }
-                    },
-                    child: BotToastInit()(context, child),
-                  ),
-                ),
-                navigatorObservers: [BotToastNavigatorObserver()],
-                localizationsDelegates: const [
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                ],
-                supportedLocales: const [
-                  Locale('zh', 'CN'),
-                ],
-              );
-      },
+    final themeController = Get.find<ThemeController>();
+    final localeController = Get.find<LocaleController>();
+    return GetMaterialApp(
+      title: Constant.title,
+      theme: themeController.themeData(),
+      locale: localeController.locale,
+      translations: FluzzTranslation(),
+      getPages: FluzzRoute.routes,
+      initialRoute: FluzzRoute.splash,
+      builder: (context, child) => MediaQuery(
+        data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+        child: GestureDetector(
+          onTap: () {
+            var focusScope = FocusScope.of(context);
+            if (!focusScope.hasPrimaryFocus &&
+                focusScope.focusedChild != null) {
+              FocusManager.instance.primaryFocus!.unfocus();
+            }
+          },
+          child: BotToastInit()(context, child),
+        ),
+      ),
+      navigatorObservers: [BotToastNavigatorObserver()],
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('zh', 'CN'),
+      ],
     );
   }
 }

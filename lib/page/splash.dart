@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluzz/common/widget.dart';
+import 'package:fluzz/controller/splash.dart';
 import 'package:get/get.dart';
 
 ///
@@ -12,6 +13,7 @@ import 'package:get/get.dart';
 class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Get.put(SplashController());
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
