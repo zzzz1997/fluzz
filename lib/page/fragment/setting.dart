@@ -26,12 +26,12 @@ class SettingFragment extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: ListTileTheme(
-          contentPadding: EdgeInsets.symmetric(
+          contentPadding: const EdgeInsets.symmetric(
             horizontal: 30,
           ),
           child: Column(
             children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               GestureDetector(
@@ -44,7 +44,7 @@ class SettingFragment extends StatelessWidget {
                   color: Theme.of(context).colorScheme.primary,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Material(
@@ -73,7 +73,7 @@ class SettingFragment extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Material(
@@ -102,7 +102,7 @@ class SettingFragment extends StatelessWidget {
                                         themeController.switchTheme(
                                             color: color);
                                       },
-                                      child: SizedBox(
+                                      child: const SizedBox(
                                         width: 40,
                                         height: 40,
                                       ),
@@ -141,7 +141,7 @@ class SettingFragment extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Material(
@@ -180,7 +180,7 @@ class SettingFragment extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Material(

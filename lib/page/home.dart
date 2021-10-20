@@ -11,6 +11,8 @@ import 'package:get/get.dart';
 /// @created_time 20200911
 ///
 class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeController());
@@ -19,22 +21,22 @@ class HomePage extends StatelessWidget {
         body: [
           TestLoadPage(),
           TestRefreshPage(),
-          SettingFragment()
+          const SettingFragment()
         ][controller.index.value],
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: controller.index.value,
           onTap: controller.onTap,
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: const Icon(Icons.home),
               label: "load".tr,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.refresh),
+              icon: const Icon(Icons.refresh),
               label: "refresh".tr,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
+              icon: const Icon(Icons.settings),
               label: "setting".tr,
             ),
           ],

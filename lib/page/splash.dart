@@ -11,6 +11,8 @@ import 'package:get/get.dart';
 /// @created_time 20200911
 ///
 class SplashPage extends StatelessWidget {
+  const SplashPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Get.put(SplashController());

@@ -113,7 +113,7 @@ class ThemeController extends GetxController {
     final errorColor = themeData.errorColor;
     final disabledColor = themeData.disabledColor;
 
-    final width = 0.5;
+    const width = 0.5;
 
     themeData = themeData.copyWith(
       brightness: brightness,
@@ -139,12 +139,12 @@ class ThemeController extends GetxController {
       toggleableActiveColor: primary,
       chipTheme: themeData.chipTheme.copyWith(
         pressElevation: 0,
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         labelStyle: themeData.textTheme.caption,
         backgroundColor: themeData.chipTheme.backgroundColor.withOpacity(0.1),
       ),
       inputDecorationTheme: InputDecorationTheme(
-        hintStyle: TextStyle(fontSize: 14),
+        hintStyle: const TextStyle(fontSize: 14),
         errorBorder: UnderlineInputBorder(
           borderSide: BorderSide(
             width: width,

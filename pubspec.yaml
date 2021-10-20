@@ -45,6 +45,8 @@ dev_dependencies:
   json_serializable: ^6.0.0
   # 开屏
   flutter_native_splash: ^1.2.4
+  # 代码规范
+  flutter_lints: ^1.0.4
 
 flutter:
   uses-material-design: true

@@ -155,7 +155,7 @@ class Widgets {
   ///
   /// 圆形
   ///
-  static CircularProgressIndicator circle() => CircularProgressIndicator(
+  static CircularProgressIndicator circle() => const CircularProgressIndicator(
         strokeWidth: 2,
         // valueColor: const AlwaysStoppedAnimation<Color>(Style.primary),
       );

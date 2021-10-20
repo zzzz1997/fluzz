@@ -21,7 +21,7 @@ void main() async {
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   }
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 ///
@@ -31,6 +31,8 @@ void main() async {
 /// @created_time 20191121
 ///
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Global.eventBus.on<ErrorTokenEvent>().listen((_) {

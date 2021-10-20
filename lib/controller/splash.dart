@@ -17,7 +17,7 @@ class SplashController extends GetxController {
   void onReady() {
     super.onReady();
 
-    timer = Timer(Duration(seconds: 2), () {
+    timer = Timer(const Duration(seconds: 2), () {
       Get.offAllNamed(FluzzRoute.home);
     });
   }

@@ -17,7 +17,7 @@ class FluzzRoute {
 
   // 路由
   static final routes = [
-    GetPage(name: splash, page: () => SplashPage()),
-    GetPage(name: home, page: () => HomePage()),
+    GetPage(name: splash, page: () => const SplashPage()),
+    GetPage(name: home, page: () => const HomePage()),
   ];
 }
