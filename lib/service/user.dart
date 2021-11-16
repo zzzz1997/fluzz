@@ -32,7 +32,7 @@ class UserService {
         : page == 2
             ? 5
             : 0;
-    List<User> users = [];
+    final List<User> users = [];
     for (var i = 0; i < length; i++) {
       users.add(User(
           controller.localeIndex.value == 0 ? mock.cname() : mock.name(),

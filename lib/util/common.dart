@@ -28,8 +28,8 @@ class CommonUtil {
   /// 保留小数（去尾法）
   ///
   static String fixed(num number, {int fractionDigits = 2}) {
-    var string = number.toString();
-    var length = string.lastIndexOf('.');
+    final string = number.toString();
+    final length = string.lastIndexOf('.');
     if (length < 0 || string.length - length - 1 < fractionDigits) {
       return number.toStringAsFixed(fractionDigits);
     } else {

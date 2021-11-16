@@ -48,7 +48,7 @@ class DioUtil {
         Global.logger.d('GET: ${Constant.server}$url');
         Global.logger.d(query);
       }
-      Response response = await dio.get(
+      final Response response = await dio.get(
         Constant.server + url,
         queryParameters: query,
       );
@@ -83,7 +83,7 @@ class DioUtil {
         Global.logger.d('POST: ${Constant.server}$url');
         Global.logger.d(jsonEncode(data));
       }
-      Response response = await dio.post(
+      final Response response = await dio.post(
         Constant.server + url,
         data: FormData.fromMap(data),
       );

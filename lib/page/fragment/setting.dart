@@ -111,9 +111,7 @@ class SettingFragment extends StatelessWidget {
                               .toList(),
                           Material(
                             child: InkWell(
-                              onTap: () {
-                                themeController.randomTheme();
-                              },
+                              onTap: themeController.randomTheme,
                               child: Container(
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(

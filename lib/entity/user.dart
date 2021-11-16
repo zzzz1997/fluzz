@@ -10,16 +10,16 @@ part 'user.g.dart';
 ///
 @JsonSerializable()
 class User {
+  User(this.username, this.time);
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
   // 用户名
   String username;
 
   // 时间
   @JsonKey(fromJson: timeFromJson, toJson: timeToJson)
   DateTime time;
-
-  User(this.username, this.time);
-
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
 

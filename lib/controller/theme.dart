@@ -96,9 +96,11 @@ class ThemeController extends GetxController {
     final colorScheme = isDark
         ? ColorScheme.dark(
             primary: primary,
+            secondary: primary,
           )
         : ColorScheme.light(
             primary: primary,
+            secondary: primary,
           );
     ThemeData themeData = ThemeData(
       brightness: brightness,

@@ -21,6 +21,20 @@ typedef WidgetBuilder = Widget Function();
 ///
 // ignore: must_be_immutable
 class LoadingView extends StatelessWidget {
+  LoadingView(
+      {required this.status,
+      required this.builder,
+      required this.isEmpty,
+      this.onErrorTap,
+      this.empty,
+      this.error,
+      this.loading,
+      Key? key})
+      : super(key: key) {
+    empty ??= prompt(true);
+    error ??= prompt(false);
+  }
+
   // 状态
   final ControllerStatus status;
 
@@ -41,20 +55,6 @@ class LoadingView extends StatelessWidget {
 
   // 加载界面
   final Widget? loading;
-
-  LoadingView(
-      {Key? key,
-      required this.status,
-      required this.builder,
-      required this.isEmpty,
-      this.onErrorTap,
-      this.empty,
-      this.error,
-      this.loading})
-      : super(key: key) {
-    empty ??= prompt(true);
-    error ??= prompt(false);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,6 +109,20 @@ class LoadingView extends StatelessWidget {
 ///
 // ignore: must_be_immutable
 class RefreshLoadingView extends StatelessWidget {
+  RefreshLoadingView(
+      {required this.status,
+      required this.builder,
+      required this.isEmpty,
+      this.onErrorTap,
+      this.empty,
+      this.error,
+      this.loading,
+      Key? key})
+      : super(key: key) {
+    empty ??= LoadingView.prompt(true);
+    error ??= LoadingView.prompt(false);
+  }
+
   // 状态
   final ControllerStatus status;
 
@@ -129,20 +143,6 @@ class RefreshLoadingView extends StatelessWidget {
 
   // 加载界面
   final Widget? loading;
-
-  RefreshLoadingView(
-      {Key? key,
-      required this.status,
-      required this.builder,
-      required this.isEmpty,
-      this.onErrorTap,
-      this.empty,
-      this.error,
-      this.loading})
-      : super(key: key) {
-    empty ??= LoadingView.prompt(true);
-    error ??= LoadingView.prompt(false);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -179,10 +179,10 @@ class RefreshLoadingView extends StatelessWidget {
 /// 空视图组件
 ///
 class _EmptyWidget extends StatelessWidget {
+  const _EmptyWidget({required this.child});
+
   // 子组件
   final Widget child;
-
-  const _EmptyWidget({required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -234,13 +234,13 @@ class _EmptyController extends GetxController {
 /// 空视图组件
 ///
 class _SliverEmpty extends SingleChildRenderObjectWidget {
-  // 列表方向
-  final ValueNotifier<AxisDirection> axisDirectionNotifier;
-
   const _SliverEmpty({
     required Widget child,
     required this.axisDirectionNotifier,
   }) : super(child: child);
+
+  // 列表方向
+  final ValueNotifier<AxisDirection> axisDirectionNotifier;
 
   @override
   RenderObject createRenderObject(BuildContext context) {
@@ -254,12 +254,12 @@ class _SliverEmpty extends SingleChildRenderObjectWidget {
 /// 空视图组件渲染器
 ///
 class _RenderSliverEmpty extends RenderSliverSingleBoxAdapter {
-  // 列表方向
-  final ValueNotifier<AxisDirection> axisDirectionNotifier;
-
   _RenderSliverEmpty({
     required this.axisDirectionNotifier,
   });
+
+  // 列表方向
+  final ValueNotifier<AxisDirection> axisDirectionNotifier;
 
   // 获取子组件大小
   double get _childSize => constraints.axis == Axis.vertical

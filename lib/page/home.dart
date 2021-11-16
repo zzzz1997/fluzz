@@ -29,15 +29,15 @@ class HomePage extends StatelessWidget {
           items: [
             BottomNavigationBarItem(
               icon: const Icon(Icons.home),
-              label: "load".tr,
+              label: 'load'.tr,
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.refresh),
-              label: "refresh".tr,
+              label: 'refresh'.tr,
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.settings),
-              label: "setting".tr,
+              label: 'setting'.tr,
             ),
           ],
         ),

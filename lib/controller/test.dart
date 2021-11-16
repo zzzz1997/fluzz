@@ -1,7 +1,7 @@
-import 'package:get/get.dart';
 import 'package:fluzz/controller/base.dart';
 import 'package:fluzz/entity/user.dart';
 import 'package:fluzz/service/user.dart';
+import 'package:get/get.dart';
 
 ///
 /// 测试加载控制器

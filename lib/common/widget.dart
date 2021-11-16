@@ -251,6 +251,8 @@ class Widgets {
 /// 文本单元
 ///
 class TextItem {
+  TextItem(this.text, this.size, {this.color = Colors.black});
+
   // 文本
   final String text;
 
@@ -259,6 +261,4 @@ class TextItem {
 
   // 颜色
   Color color;
-
-  TextItem(this.text, this.size, {this.color = Colors.black});
 }

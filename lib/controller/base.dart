@@ -104,7 +104,7 @@ abstract class BaseRefreshController<T> extends GetxController {
       _page++;
     } else {
       noMore(true);
-      Global.toast("noMore".tr);
+      Global.toast('noMore'.tr);
     }
   }
 }

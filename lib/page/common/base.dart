@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart' hide WidgetBuilder;
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:fluzz/common/global.dart';
 import 'package:fluzz/common/widget.dart';
 import 'package:fluzz/controller/base.dart';
 import 'package:fluzz/page/widget/loading.dart';
-import 'package:flutter/material.dart' hide WidgetBuilder;
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
 
 ///

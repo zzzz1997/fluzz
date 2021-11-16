@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
         data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
         child: GestureDetector(
           onTap: () {
-            var focusScope = FocusScope.of(context);
+            final focusScope = FocusScope.of(context);
             if (!focusScope.hasPrimaryFocus &&
                 focusScope.focusedChild != null) {
               FocusManager.instance.primaryFocus!.unfocus();

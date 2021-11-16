@@ -56,7 +56,7 @@ class Global {
   ///
   /// 设置状态栏风格
   ///
-  static setStyle(bool light) {
+  static setStyle({required bool light}) {
     SystemChrome.setSystemUIOverlayStyle(
         light ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark);
   }
