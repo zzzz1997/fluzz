@@ -104,7 +104,6 @@ class ThemeController extends GetxController {
           );
     ThemeData themeData = ThemeData(
       brightness: brightness,
-      primaryColorBrightness: Brightness.dark,
       primarySwatch: themeColor.value,
       fontFamily: fontValueList[fontIndex.value],
       colorScheme: colorScheme,
@@ -143,7 +142,7 @@ class ThemeController extends GetxController {
         pressElevation: 0,
         padding: const EdgeInsets.symmetric(horizontal: 10),
         labelStyle: themeData.textTheme.caption,
-        backgroundColor: themeData.chipTheme.backgroundColor.withOpacity(0.1),
+        backgroundColor: themeData.chipTheme.backgroundColor?.withOpacity(0.1),
       ),
       inputDecorationTheme: InputDecorationTheme(
         hintStyle: const TextStyle(fontSize: 14),
