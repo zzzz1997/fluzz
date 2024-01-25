@@ -190,16 +190,16 @@ class _EmptyWidget extends StatelessWidget {
     return Obx(
       () => controller.size.value.width == 0
           ? _SliverEmpty(
+              axisDirectionNotifier: controller.axisDirectionNotifier,
               child: LayoutBuilder(
                 builder: (_, constraints) {
-                  SchedulerBinding.instance!.addPostFrameCallback((_) {
+                  SchedulerBinding.instance.addPostFrameCallback((_) {
                     controller.size(
                         Size(constraints.maxWidth, constraints.maxHeight));
                   });
                   return Widgets.size();
                 },
-              ),
-              axisDirectionNotifier: controller.axisDirectionNotifier)
+              ))
           : SliverToBoxAdapter(
               child: Container(
                 width: controller.size.value.width,

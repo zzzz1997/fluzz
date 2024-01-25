@@ -42,7 +42,7 @@ android {
 
     defaultConfig {
         applicationId "com.zzapp.fluzz"
-        minSdkVersion 16
+        minSdkVersion flutter.minSdkVersion
         targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

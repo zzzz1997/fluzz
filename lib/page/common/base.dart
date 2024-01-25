@@ -43,7 +43,7 @@ mixin BaseLoad<T extends BaseLoadController> on StatelessWidget {
     } catch (e) {
       c = Get.put(controller, tag: controller.tag);
       if (!needRefresh) {
-        WidgetsBinding.instance!.addPostFrameCallback((_) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
           _onRefresh();
         });
       }

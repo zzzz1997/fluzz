@@ -24,8 +24,8 @@ class DioUtil {
   ///
   static Dio _getDio() {
     _dio ??= Dio(BaseOptions(
-      connectTimeout: 10000,
-      receiveTimeout: 10000,
+      connectTimeout: const Duration(seconds: 10),
+      receiveTimeout: const Duration(seconds: 10),
     ));
     _dio!.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {
@@ -102,7 +102,7 @@ class DioUtil {
         throw response.data['message'];
       }
     } catch (e) {
-      if (e is DioError && e.type == DioErrorType.connectTimeout) {
+      if (e is DioException && e.type == DioExceptionType.connectionTimeout) {
         throw '网络开小差了';
       }
       rethrow;

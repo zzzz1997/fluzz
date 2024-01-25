@@ -16,7 +16,7 @@ dependencies:
   # 状态管理
   get: ^4.6.1
   # 缓存图片
-  extended_image: ^6.0.1
+  extended_image: ^8.2.0
   # 模拟数据
   dart_mock: ^2.0.0
   # 吐司
@@ -26,15 +26,17 @@ dependencies:
   # 序列化注解
   json_annotation: ^4.4.0
   # svg
-  flutter_svg: ^1.0.3
+  flutter_svg: ^2.0.9
   # 刷新
   flutter_easyrefresh: ^2.2.1
   # 网络请求
-  dio: ^4.0.4
+  dio: ^5.4.0
   # 日志
-  logger: ^1.1.0
+  logger: ^2.0.2+1
   # 事件
   event_bus: ^2.0.0
+  convert: ^3.1.1
+  crypto: ^3.0.3
 
 dev_dependencies:
   flutter_test:
@@ -46,7 +48,7 @@ dev_dependencies:
   # 开屏
   flutter_native_splash: ^2.1.0
   # 代码规范
-  flutter_lints: ^1.0.4
+  flutter_lints: ^3.0.1
 
 flutter:
   uses-material-design: true

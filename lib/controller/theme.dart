@@ -111,7 +111,7 @@ class ThemeController extends GetxController {
 
     final primaryColor = themeData.primaryColor;
     final dividerColor = themeData.dividerColor;
-    final errorColor = themeData.errorColor;
+    final errorColor = themeData.colorScheme.error;
     final disabledColor = themeData.disabledColor;
 
     const width = 0.5;
@@ -126,9 +126,8 @@ class ThemeController extends GetxController {
       appBarTheme: themeData.appBarTheme.copyWith(elevation: 0),
       splashColor: themeColor.value.withAlpha(50),
       hintColor: themeData.hintColor.withAlpha(90),
-      errorColor: Colors.red,
       textTheme: themeData.textTheme.copyWith(
-        subtitle2: themeData.textTheme.subtitle2!.copyWith(
+        titleSmall: themeData.textTheme.titleSmall!.copyWith(
           textBaseline: TextBaseline.alphabetic,
         ),
       ),
@@ -137,11 +136,10 @@ class ThemeController extends GetxController {
         selectionColor: primary.withAlpha(60),
         selectionHandleColor: primary.withAlpha(60),
       ),
-      toggleableActiveColor: primary,
       chipTheme: themeData.chipTheme.copyWith(
         pressElevation: 0,
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        labelStyle: themeData.textTheme.caption,
+        labelStyle: themeData.textTheme.bodySmall,
         backgroundColor: themeData.chipTheme.backgroundColor?.withOpacity(0.1),
       ),
       inputDecorationTheme: InputDecorationTheme(

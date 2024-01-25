@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
       getPages: FluzzRoute.routes,
       initialRoute: FluzzRoute.splash,
       builder: (context, child) => MediaQuery(
-        data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+        data: MediaQuery.of(context).copyWith(textScaler: TextScaler.noScaling),
         child: GestureDetector(
           onTap: () {
             final focusScope = FocusScope.of(context);

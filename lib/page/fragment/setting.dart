@@ -94,21 +94,18 @@ class SettingFragment extends StatelessWidget {
                         spacing: 5,
                         runSpacing: 5,
                         children: <Widget>[
-                          ...Colors.primaries
-                              .map((color) => Material(
-                                    color: color,
-                                    child: InkWell(
-                                      onTap: () {
-                                        themeController.switchTheme(
-                                            color: color);
-                                      },
-                                      child: const SizedBox(
-                                        width: 40,
-                                        height: 40,
-                                      ),
-                                    ),
-                                  ))
-                              .toList(),
+                          ...Colors.primaries.map((color) => Material(
+                                color: color,
+                                child: InkWell(
+                                  onTap: () {
+                                    themeController.switchTheme(color: color);
+                                  },
+                                  child: const SizedBox(
+                                    width: 40,
+                                    height: 40,
+                                  ),
+                                ),
+                              )),
                           Material(
                             child: InkWell(
                               onTap: themeController.randomTheme,
@@ -152,7 +149,7 @@ class SettingFragment extends StatelessWidget {
                       ),
                       Text(
                         ThemeController.fontName(themeController.fontIndex),
-                        style: Theme.of(context).textTheme.caption,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ],
                   ),
@@ -192,7 +189,7 @@ class SettingFragment extends StatelessWidget {
                       Text(
                         LocaleController.localeName(
                             localeController.localeIndex.value),
-                        style: Theme.of(context).textTheme.caption,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ],
                   ),
