@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
-import androidx.annotation.NonNull
 import androidx.core.content.FileProvider
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -12,7 +11,6 @@ import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
-import io.flutter.plugin.common.PluginRegistry
 import java.io.File
 
 /**
@@ -31,19 +29,11 @@ class CommonPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAwa
     // 活动
     private lateinit var activity: Activity
 
-    companion object {
-        @JvmStatic
-        fun registerWith(registrar: PluginRegistry.Registrar) {
-            val plugin = CommonPlugin()
-            plugin.init(registrar.messenger(), registrar.activity())
-        }
-    }
-
-    override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+    override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         pluginBinding = flutterPluginBinding
     }
 
-    override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: MethodChannel.Result) {
+    override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         when (call.method) {
             "getPlatformVersion" -> result.success("Android ${Build.VERSION.RELEASE}")
             "installApk" -> {
@@ -53,7 +43,7 @@ class CommonPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAwa
         }
     }
 
-    override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+    override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
     }
 

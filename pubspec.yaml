@@ -14,7 +14,7 @@ dependencies:
 
   cupertino_icons: ^1.0.4
   # 状态管理
-  get: ^4.6.1
+  get: ^4.6.6
   # 缓存图片
   extended_image: ^8.2.0
   # 模拟数据
